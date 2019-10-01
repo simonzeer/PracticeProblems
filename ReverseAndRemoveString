@@ -1,0 +1,34 @@
+using System;
+using System.Linq;
+
+namespace ReverseStringAndRemoveParentheses
+{
+    public class Program
+    {
+        public static string ReverseAndRemoveString(string str)
+        {
+            int leftIndex = str.LastIndexOf("(");
+            if (leftIndex == -1)
+            {
+                return str;
+            }
+            else
+            {
+                int rightIndex = str.IndexOf(")");
+
+                return ReverseAndRemoveString(str.Substring(0, leftIndex)
+                    + new string(str.Substring(leftIndex + 1, rightIndex - leftIndex - 1).Reverse().ToArray())
+                    + str.Substring(rightIndex + 1)
+                    );
+            }
+        }
+
+        static void Main(string[] args)
+        {
+            Console.WriteLine(ReverseAndRemoveString("p(rq)st"));
+            Console.WriteLine(ReverseAndRemoveString("(p(rq)st)"));
+            Console.WriteLine(ReverseAndRemoveString("ab(cd(ef)gh)ij"));
+            Console.ReadLine();
+        }
+    }
+}
